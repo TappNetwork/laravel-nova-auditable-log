@@ -11,6 +11,7 @@
                         <th></th>
                         <th class="text-left"><span> {{__('User')}} </span></th>
                         <th class="text-left"><span> {{__('Event')}} </span></th>
+                        <th class="text-left"><span> {{__('Item')}} </span></th>
                         <th class="text-left"><span> {{__('Date/Time')}} </span></th>
                         <th class="text-left"><span> {{__('Old Values')}} </span></th>
                         <th class="text-left"><span> {{__('New Values')}} </span></th>
@@ -44,6 +45,9 @@
                         </td>
                         <td>
                             {{ audit.event }}
+                        </td>
+                        <td>
+                            {{ audit.auditable_type }}
                         </td>
                         <td>
                             {{ audit.created_at }}
