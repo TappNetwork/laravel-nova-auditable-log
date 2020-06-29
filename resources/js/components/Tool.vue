@@ -11,7 +11,7 @@
                         <th></th>
                         <th class="text-left"><span> {{__('User')}} </span></th>
                         <th class="text-left"><span> {{__('Event')}} </span></th>
-                        <th class="text-left"><span> {{__('Item')}} </span></th>
+                        <th v-if="relatedAudits" class="text-left"><span> {{__('Item')}} </span></th>
                         <th class="text-left"><span> {{__('Date/Time')}} </span></th>
                         <th class="text-left"><span> {{__('Old Values')}} </span></th>
                         <th class="text-left"><span> {{__('New Values')}} </span></th>
@@ -46,7 +46,7 @@
                         <td>
                             {{ audit.event }}
                         </td>
-                        <td>
+                        <td v-if="relatedAudits">
                             {{ audit.auditable_type }}
                         </td>
                         <td>
@@ -129,7 +129,7 @@
     import {normaliseFields} from './../fields';
 
     export default {
-        props: ['resourceName', 'resourceId', 'field'],
+        props: ['resourceName', 'resourceId', 'field', 'panel'],
 
         components: {
             RestoreAuditModal
@@ -142,6 +142,7 @@
                 restore: null,
                 parentFields: [],
                 canRestore: false,
+                relatedAudits: this.panel.fields[0].relatedAudits,
             }
         },
 
