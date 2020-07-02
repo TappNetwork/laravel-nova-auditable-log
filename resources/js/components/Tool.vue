@@ -47,7 +47,8 @@
                             {{ audit.event }}
                         </td>
                         <td v-if="relatedAudits">
-                            {{ audit.auditable_type }}
+                            <a v-if="audit.item_url" :href="'/admin/resources/' + audit.item_url + '/' + audit.auditable_id" class="no-underline dim text-primary font-bold">{{ audit.item_name }}</a>
+                            <span v-else>{{ audit.item_name }}</span>
                         </td>
                         <td>
                             {{ audit.created_at }}
