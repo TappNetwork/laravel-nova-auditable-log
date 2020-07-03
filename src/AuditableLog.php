@@ -40,4 +40,14 @@ class AuditableLog extends ResourceTool
     {
         return 'auditable-log';
     }
+
+    /**
+     * Indicates that the audit log should show related audits.
+     *
+     * @return $this
+     */
+    public function relatedAudits()
+    {
+        return $this->withMeta(['relatedAudits' => true]);
+    }
 }
