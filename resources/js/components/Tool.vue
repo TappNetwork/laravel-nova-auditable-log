@@ -12,6 +12,7 @@
                         <th class="text-left"><span> {{__('User')}} </span></th>
                         <th class="text-left"><span> {{__('Event')}} </span></th>
                         <th v-if="relatedAudits" class="text-left"><span> {{__('Item')}} </span></th>
+                        <th v-if="relatedAudits" class="text-left"><span> {{__('Type')}} </span></th>
                         <th class="text-left"><span> {{__('Date/Time')}} </span></th>
                         <th class="text-left"><span> {{__('Old Values')}} </span></th>
                         <th class="text-left"><span> {{__('New Values')}} </span></th>
@@ -49,6 +50,9 @@
                         <td v-if="relatedAudits">
                             <a v-if="audit.item_url" :href="'/admin/resources/' + audit.item_url + '/' + audit.auditable_id" class="no-underline dim text-primary font-bold">{{ audit.item_name }}</a>
                             <span v-else>{{ audit.item_name }}</span>
+                        </td>
+                        <td v-if="relatedAudits">
+                            {{ audit.auditable_type | typeLabel }}
                         </td>
                         <td>
                             {{ audit.created_at }}
@@ -154,6 +158,19 @@
 
             // Normalise the parent fields
             this.parentFields = normaliseFields(this.$parent.$children.filter(component => component.$vnode.componentOptions.tag === 'panel')[0].fields);
+        },
+
+        filters: {
+          typeLabel: function (value) {
+            if (!value) {
+              return '';
+            }
+
+            value = value.toString();
+            value = value.replace('App\\', '');
+
+            return value.split(/(?=[A-Z])/).join(' ');
+          }
         },
 
         methods: {
